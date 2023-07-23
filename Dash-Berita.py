@@ -89,27 +89,37 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div(children='''Pariwisata'''),
-            dcc.Graph(id='graph1',figure={})], 
+            dcc.Graph(id='graph1',figure=
+                     px.bar(value1, x='Sentimen', y='Total', color='Sentimen')
+    )], 
         className="two columns",style={"width":'20%', "margin": 0, 'display': 'inline-block'}),
         
         html.Div([
             html.Div(children='''Ekspor'''),
-            dcc.Graph(id='graph2',figure={})],
+            dcc.Graph(id='graph2',figure=
+                     px.bar(value2, x='Sentimen', y='Total', color='Sentimen')
+    )],
         className="two columns",style={"width":'20%', "margin": 0, 'display': 'inline-block'}),
         
         html.Div([
             html.Div(children='''Diplomasi'''),
-            dcc.Graph(id='graph3',figure={})],
+            dcc.Graph(id='graph3',figure=
+                     px.bar(value3, x='Sentimen', y='Total', color='Sentimen')
+   )],
         className="two columns", style={"width":'20%', "margin": 0, 'display': 'inline-block'}),
         
         html.Div([
             html.Div(children='''Kebijakan'''),
-            dcc.Graph(id='graph4',figure={})],
+            dcc.Graph(id='graph4',figure=
+                      px.bar(value4, x='Sentimen', y='Total', color='Sentimen')
+   )],
         className="two columns",style={"width":'20%', "margin": 0, 'display': 'inline-block'}),
         
         html.Div([
             html.Div(children='''Masyarakat'''),
-            dcc.Graph(id='graph5',figure={})],
+            dcc.Graph(id='graph5',figure=
+                      px.bar(value5, x='Sentimen', y='Total', color='Sentimen')
+                     )],
         className="two columns",style={"width":'20%', "margin": 0, 'display': 'inline-block'}),
     ], className='row')
 
@@ -121,12 +131,7 @@ app.layout = html.Div([
 # Connect the Plotly graphs with Dash Components
 @app.callback(
     [Output(component_id='countainer', component_property='children'),
-     Output(component_id='datable', component_property='data'),
-     Output(component_id='graph1', component_property='figure'),
-     Output(component_id='graph2', component_property='figure'),
-     Output(component_id='graph3', component_property='figure'),
-     Output(component_id='graph4', component_property='figure'),
-     Output(component_id='graph5', component_property='figure')],
+     Output(component_id='datable', component_property='data')],
     [Input(component_id='slct_news', component_property='value')])
     
 def update_graph(option_slctd):
@@ -141,13 +146,7 @@ def update_graph(option_slctd):
                        'kebijakan_na':'Kebijakan','masyarakat_na':'Masyarakat'}, inplace=True)
     
     ##baru chart
-    fig1= px.bar(value1, x='Sentimen', y='Total', color='Sentimen')
-    fig2= px.bar(value2, x='Sentimen', y='Total', color='Sentimen')
-    fig3= px.bar(value3, x='Sentimen', y='Total', color='Sentimen')
-    fig4= px.bar(value4, x='Sentimen', y='Total', color='Sentimen')
-    fig5= px.bar(value5, x='Sentimen', y='Total', color='Sentimen')
-    
-    return container, dff.to_dict("records"), fig1, fig2, fig3, fig4, fig5
+    return container, dff.to_dict("records")
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
