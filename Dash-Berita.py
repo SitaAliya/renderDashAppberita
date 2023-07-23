@@ -9,11 +9,12 @@ import plotly.express as px  # (version 4.7.0 or higher)
 import plotly.graph_objects as go
 from dash import Dash, dash_table
 from dash import Dash, dcc, html, Input, Output
-from jupyter_dash import JupyterDash # pip install dash (version 2.0.0 or higher)
+#from jupyter_dash import JupyterDash # pip install dash (version 2.0.0 or higher)
 
 #external_stylesheets = 'https://codepen.io/chriddyp/pen/bWLwgP.css'
 
-app = JupyterDash(__name__)
+app = Dash(__name__)
+server=app.server
 
 df=pd.read_json('all-berita-bp-short.json')
 cleanup_nums = {"pariwisata_na":{3: 'None', 2:'Positif',0:'Negatif'},
@@ -150,5 +151,5 @@ def update_graph(option_slctd):
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=False)
 
